@@ -3,10 +3,7 @@ package com.cursojava.curso.controllers;
 import com.cursojava.curso.dao.UsuarioDao;
 import com.cursojava.curso.models.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,14 +19,20 @@ public class UsuarioController {
         return usuarioDao.getUsuarios();
     }
 
+    /*
     @RequestMapping(value="api/usuarios/{id}", method = RequestMethod.GET)
     public Usuario getUsuario(@PathVariable Long id) {
 
-    }
+    }*/
 
     @RequestMapping(value="api/usuarios/{id}", method = RequestMethod.DELETE)
-    public Usuario eliminarUsuario(@PathVariable Long id) {
+    public void eliminarUsuario(@PathVariable Long id) {
+        usuarioDao.elimininarUsuario(id);
+    }
 
+    @RequestMapping(value="api/usuarios", method = RequestMethod.POST)
+    public void registrarUsuario(@RequestBody Usuario usuario) {
+        usuarioDao.registrar(usuario);
     }
 
 }
